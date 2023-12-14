@@ -1,0 +1,400 @@
+<!-- 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Results</title>
+  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        td {
+            background-color: #f8f9fa;
+        }
+
+        .mb-3 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-4">
+        <h2 class="mb-4">Student Results</h2>
+
+        <table id="resultsTable" class="table">
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Course Name</th>
+                    <th>Obtained Marks</th>
+                    <th>Total Marks</th>
+                    <th>Grade</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <div class="mb-3">
+            <label for="newStudentName" class="form-label">New Student Name:</label>
+            <input type="text" id="newStudentName" class="form-control">
+            <label for="newCourseName" class="form-label">New Course Name:</label>
+            <input type="text" id="newCourseName" class="form-control">
+            <button onclick="addNewStudent()" class="btn btn-success">Add New Student</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Function to calculate result based on obtained and total marks
+        function calculateResult(index) {
+            const obtainedMarksElement = document.querySelectorAll('#resultsTable tbody tr td[contenteditable="true"]')[index];
+            const totalMarksElement = obtainedMarksElement.nextElementSibling;
+            const gradeElement = totalMarksElement.nextElementSibling;
+            const statusElement = gradeElement.nextElementSibling;
+
+            const obtainedMarks = parseInt(obtainedMarksElement.textContent.trim());
+            const totalMarks = parseInt(totalMarksElement.textContent.trim());
+
+            // Check if obtainedMarks and totalMarks are valid numbers
+            if (!isNaN(obtainedMarks) && !isNaN(totalMarks)) {
+                // Calculate the percentage and determine the grade and status
+                const percentage = (obtainedMarks / totalMarks) * 100;
+                let grade, status;
+
+                if (percentage >= 85) {
+                    grade = 'A';
+                    status = 'Pass';
+                } else if (percentage >= 70) {
+                    grade = 'B';
+                    status = 'Pass';
+                } else if (percentage >= 60) {
+                    grade = 'C';
+                    status = 'Pass';
+                } else if (percentage >= 40) {
+                    grade = 'D';
+                    status = 'Pass';
+                } else {
+                    grade = 'F';
+                    status = 'Fail';
+                }
+
+                // Update the table with calculated values
+                gradeElement.textContent = grade;
+                statusElement.textContent = status;
+            } else {
+                // Handle the case where obtainedMarks  are not valid numbers
+                alert('Please enter valid numeric values for Obtained Marks ');
+            }
+        }
+
+        // Function to add a new student
+        function addNewStudent() {
+            const newStudentName = document.getElementById('newStudentName').value.trim();
+            const newCourseName = document.getElementById('newCourseName').value.trim();
+
+            if (newStudentName && newCourseName) {
+                const tableBody = document.querySelector('#resultsTable tbody');
+                const newRow = tableBody.insertRow();
+
+                // Generate a unique ID (you may want to use a more robust method in a real application)
+                const newStudentId = tableBody.rows.length;
+
+                // Add cells to the new row
+                const cellId = newRow.insertCell(0);
+                const cellStudentName = newRow.insertCell(1);
+                const cellCourseName = newRow.insertCell(2);
+                const cellObtainedMarks = newRow.insertCell(3);
+                const cellTotalMarks = newRow.insertCell(4);
+                const cellGrade = newRow.insertCell(5);
+                const cellStatus = newRow.insertCell(6);
+                const cellAction = newRow.insertCell(7);
+
+                // Set cell values
+                cellId.textContent = newStudentId;
+                cellStudentName.textContent = newStudentName;
+                cellCourseName.textContent = newCourseName;
+                cellObtainedMarks.contentEditable = true;
+                cellTotalMarks.textContent = '100'; // Set default total marks to 100
+                cellGrade.textContent = '';
+                cellStatus.textContent = '';
+                cellAction.innerHTML = `<button class="btn btn-primary" onclick="calculateResult(${newStudentId - 1})">Calculate</button>`;
+
+                // Calculate the result for the new student immediately
+                calculateResult(newStudentId - 1);
+            } else {
+                alert('Please enter both student name and course name.');
+            }
+        }
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Results</title>
+  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        td {
+            background-color: #f8f9fa;
+        }
+
+        .mb-3 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-4">
+        <h2 class="mb-4">Student Results</h2>
+
+        <table id="resultsTable" class="table">
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Course Name</th>
+                    <th>Obtained Marks</th>
+                    <th>Total Marks</th>
+                    <th>Grade</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <div class="mb-3">
+            <label for="newStudentName" class="form-label">New Student Name:</label>
+            <input type="text" id="newStudentName" class="form-control">
+            <label for="newCourseName" class="form-label">New Course Name:</label>
+            <input type="text" id="newCourseName" class="form-control">
+            <button onclick="addNewStudent()" class="btn btn-success">Add New Student</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Function to calculate result based on obtained and total marks
+        function calculateResult(index) {
+            const obtainedMarksElement = document.querySelectorAll('#resultsTable tbody tr td[contenteditable="true"]')[index];
+            const totalMarksElement = obtainedMarksElement.nextElementSibling;
+            const gradeElement = totalMarksElement.nextElementSibling;
+            const statusElement = gradeElement.nextElementSibling;
+
+            const obtainedMarks = parseInt(obtainedMarksElement.textContent.trim());
+            const totalMarks = parseInt(totalMarksElement.textContent.trim());
+
+            // Check if obtainedMarks and totalMarks are valid numbers
+            if (!isNaN(obtainedMarks) && !isNaN(totalMarks)) {
+                // Calculate the percentage and determine the grade and status
+                const percentage = (obtainedMarks / totalMarks) * 100;
+                let grade, status;
+
+                if (percentage >= 85) {
+                    grade = 'A';
+                    status = 'Pass';
+                } else if (percentage >= 70) {
+                    grade = 'B';
+                    status = 'Pass';
+                } else if (percentage >= 60) {
+                    grade = 'C';
+                    status = 'Pass';
+                } else if (percentage >= 40) {
+                    grade = 'D';
+                    status = 'Pass';
+                } else {
+                    grade = 'F';
+                    status = 'Fail';
+                }
+
+                // Update the table with calculated values
+                gradeElement.textContent = grade;
+                statusElement.textContent = status;
+
+                // Save the updated data to localStorage
+                saveDataToLocalStorage();
+            } else {
+                // Handle the case where obtainedMarks are not valid numbers
+                alert('Please enter valid numeric values for Obtained Marks ');
+            }
+        }
+
+        // Function to add a new student
+        function addNewStudent() {
+            const newStudentName = document.getElementById('newStudentName').value.trim();
+            const newCourseName = document.getElementById('newCourseName').value.trim();
+
+            if (newStudentName && newCourseName) {
+                const tableBody = document.querySelector('#resultsTable tbody');
+                const newRow = tableBody.insertRow();
+
+                // Generate a unique ID (you may want to use a more robust method in a real application)
+                const newStudentId = tableBody.rows.length;
+
+                // Add cells to the new row
+                const cellId = newRow.insertCell(0);
+                const cellStudentName = newRow.insertCell(1);
+                const cellCourseName = newRow.insertCell(2);
+                const cellObtainedMarks = newRow.insertCell(3);
+                const cellTotalMarks = newRow.insertCell(4);
+                const cellGrade = newRow.insertCell(5);
+                const cellStatus = newRow.insertCell(6);
+                const cellAction = newRow.insertCell(7);
+
+                // Set cell values
+                cellId.textContent = newStudentId;
+                cellStudentName.textContent = newStudentName;
+                cellCourseName.textContent = newCourseName;
+                cellObtainedMarks.contentEditable = true;
+                cellTotalMarks.textContent = '100'; // Set default total marks to 100
+                cellGrade.textContent = '';
+                cellStatus.textContent = '';
+                cellAction.innerHTML = `<button class="btn btn-primary" onclick="calculateResult(${newStudentId - 1})">Calculate</button>`;
+
+                // Calculate the result for the new student immediately
+                calculateResult(newStudentId - 1);
+
+                // Save the updated data to localStorage
+                saveDataToLocalStorage();
+            } else {
+                alert('Please enter both student name and course name.');
+            }
+        }
+
+        // Function to save data to localStorage
+        function saveDataToLocalStorage() {
+            const tableRows = document.querySelectorAll('#resultsTable tbody tr');
+            const students = [];
+
+            tableRows.forEach(row => {
+                const cells = row.cells;
+                const student = {
+                    id: cells[0].textContent,
+                    name: cells[1].textContent,
+                    course: cells[2].textContent,
+                    obtainedMarks: cells[3].textContent,
+                    totalMarks: cells[4].textContent,
+                    grade: cells[5].textContent,
+                    status: cells[6].textContent
+                };
+
+                students.push(student);
+            });
+
+            localStorage.setItem('students', JSON.stringify(students));
+        }
+
+        // Function to load data from localStorage on page load
+        function loadDataFromLocalStorage() {
+            const storedStudents = localStorage.getItem('students');
+
+            if (storedStudents) {
+                const students = JSON.parse(storedStudents);
+                const tableBody = document.querySelector('#resultsTable tbody');
+
+                students.forEach(student => {
+                    const newRow = tableBody.insertRow();
+
+                    // Add cells to the new row
+                    const cellId = newRow.insertCell(0);
+                    const cellStudentName = newRow.insertCell(1);
+                    const cellCourseName = newRow.insertCell(2);
+                    const cellObtainedMarks = newRow.insertCell(3);
+                    const cellTotalMarks = newRow.insertCell(4);
+                    const cellGrade = newRow.insertCell(5);
+                    const cellStatus = newRow.insertCell(6);
+                    const cellAction = newRow.insertCell(7);
+
+                    // Set cell values
+                    cellId.textContent = student.id;
+                    cellStudentName.textContent = student.name;
+                    cellCourseName.textContent = student.course;
+                    cellObtainedMarks.textContent = student.obtainedMarks;
+                    cellTotalMarks.textContent = student.totalMarks;
+                    cellGrade.textContent = student.grade;
+                    cellStatus.textContent = student.status;
+                    cellAction.innerHTML = `<button class="btn btn-primary" onclick="calculateResult(${student.id - 1})">Calculate</button>`;
+                });
+            }
+        }
+
+        // Load data from localStorage on page load
+        window.onload = function () {
+            loadDataFromLocalStorage();
+        };
+    </script>
+</body>
+</html>
+
